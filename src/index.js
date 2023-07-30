@@ -3,13 +3,41 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Home from './home/Home';
+import UserInfo from './userInfo/UserIfo';
+import ItemExpended from './itemView/itemExpended/ItemExpended';
+import ReadReview from './reivew/ReadReview';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        path: '/',
+        element: <Home/>
+      },
+      {
+        path: 'me/',
+        element: <UserInfo />,
+      },
+      {
+        // dynamic path - will receive game id (note :)
+        // path: "Items/:itemId",
+        path: 'items/',
+        element: <ItemExpended />
+      },
+      {
+        path: 'review/',
+        element: <ReadReview />
+      }
+    ]
+  }
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+root.render(<RouterProvider router={router} />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
