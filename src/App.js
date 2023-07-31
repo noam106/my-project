@@ -1,22 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
 import Header from './header/Header';
-import Search from './search/Search';
-import Item from './itemView/Item/Item';
-import ItemExpended from './itemView/itemExpended/ItemExpended';
-import ItemList from './itemView/itemList/ItemList';
+import Search from './itemView/Search';
+import Item from './itemView/Item';
+import ItemExpended from './itemView/ItemExpended';
+import ItemList from './itemView/ItemList';
 import InterestedList from './interestedList/InterestedList';
 import ReadReview from './reivew/ReadReview';
 import WriteReview from './reivew/WriteReview';
 import { Outlet } from 'react-router-dom';
+import ItemPage from './itemView/ItemPage';
 
 function App() {
   return (
     <>
-    <h1> my app</h1>
-    {/* <Header />
-    <Search />
-    <Item />
+    <Header /> 
+    <ItemPage />
+    {/* <Search />
+   
     <ItemExpended />
     <ItemList />
     <InterestedList />

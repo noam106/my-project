@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './home/Home';
 import UserInfo from './userInfo/UserIfo';
-import ItemExpended from './itemView/itemExpended/ItemExpended';
+import ItemExpended from './itemView/ItemExpended';
 import ReadReview from './reivew/ReadReview';
 
 const router = createBrowserRouter([
