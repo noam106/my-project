@@ -10,8 +10,31 @@ import ReadReview from './reivew/ReadReview';
 import WriteReview from './reivew/WriteReview';
 import { Outlet } from 'react-router-dom';
 import ItemPage from './itemView/ItemPage';
+import axios from 'axios';
+import { SetUserContext } from './context/UserContext';
+import { ME_URL } from './infra/Urls';
+import { useContext, useEffect } from 'react';
 
 function App() {
+  const setUser = useContext(SetUserContext)
+
+  useEffect(
+    () => {
+      const fetchData = async () => {
+        const token = localStorage.getItem('token')
+        if (token) {
+          const meResponse = await axios.get(ME_URL,
+            {headers: {Authorization: `Bearer ${token}`}})
+          console.log(meResponse)
+          setUser({
+            user: {...meResponse.data}
+          })
+        }
+      }
+      fetchData()
+    },[]
+  )
+
   return (
     <>
     <Header /> 

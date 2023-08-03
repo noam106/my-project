@@ -20,6 +20,7 @@ export default function ItemPage() {
         try {
             const response = await axios.get(urlToSend)
             console.log(response)
+            // console.log(results)
             // setFlights(response.data)
             setItems(
                 {...items,
