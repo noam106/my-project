@@ -10,6 +10,8 @@ import ItemExpended from './itemView/ItemExpended';
 import ReadReview from './reivew/ReadReview';
 import LoginPage from './login/LoginPage';
 import UserProvider from './context/UserContext';
+import SearchItemByType from './search/SearchItemByType';
+import SignupPage from './signUp/SignupPage';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
         path: 'me/',
         element: <UserInfo />,
       },
+      // {
+      //   path: 'search/',
+      //   element: <SearchItemByType />,
+      // },
       {
         // dynamic path - will receive game id (note :)
         // path: "Items/:itemId",
@@ -47,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />
+  },
+  {
+    path: '/signup',
+    element: <SignupPage />
   }
 ])
 

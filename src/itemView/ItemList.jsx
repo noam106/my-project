@@ -5,10 +5,12 @@ import Item from "./Item";
 export default function ItemList({items, loadMore}) {
 
     const {count, next, results} = items
+    console.log(items.results)
 
     const clothes = results.map((item) => {
-        return <Item key={Item.id} item={item} />
-    })
+        return <Item key={item.id} item={item} />
+            })
+            
 
     return(
         <List>

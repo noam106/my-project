@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import CheckroomIcon from '@mui/icons-material/Checkroom';
 import { useNavigate } from 'react-router-dom';
 import { SetUserContext, UserContext } from '../context/UserContext';
 
@@ -23,6 +24,7 @@ function Header() {
   const navigate = useNavigate()
   const user = React.useContext(UserContext)
   const setUser = React.useContext(SetUserContext)
+  console.log(user)
 
 const [anchorElNav, setAnchorElNav] = React.useState(null);
 const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -61,7 +63,7 @@ return (
   <AppBar position="static">
     <Container maxWidth="xl">
       <Toolbar disableGutters>
-        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <CheckroomIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
         <Typography
           variant="h6"
           noWrap
@@ -116,7 +118,7 @@ return (
             ))}
           </Menu>
         </Box>
-        <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+        <CheckroomIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
         <Typography
           variant="h5"
           noWrap
