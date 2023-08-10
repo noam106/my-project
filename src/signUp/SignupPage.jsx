@@ -21,7 +21,7 @@ const SignupPage = () => {
     password: '',
   });
 
-  const navigate = useNavigate
+  const navigate = useNavigate()
   const user = useContext(UserContext);
   const setUser = useContext(SetUserContext)
 

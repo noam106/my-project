@@ -17,7 +17,8 @@ import { useNavigate } from 'react-router-dom';
 import { SetUserContext, UserContext } from '../context/UserContext';
 
 const pages = ['Home', 'me', 'rewiew'];
-const settings = ['Login', 'Profile', 'Account', 'Dashboard', 'Logout'];
+const settingsSinginUser = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settingsAnnonimusUser = ['Login', 'Signup'];
 
 function Header() {
 
@@ -28,6 +29,12 @@ function Header() {
 
 const [anchorElNav, setAnchorElNav] = React.useState(null);
 const [anchorElUser, setAnchorElUser] = React.useState(null);
+let settings = []
+if (user.user) {
+  settings = settingsSinginUser
+} else {
+  settings = settingsAnnonimusUser
+}
 
 const handleOpenNavMenu = (event) => {
   setAnchorElNav(event.currentTarget);
