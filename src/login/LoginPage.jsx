@@ -12,11 +12,13 @@ import axios from "axios";
 import { LOGIN_URL, ME_URL } from "../infra/Urls";
 import { SetUserContext, UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { SetNotificationContext } from "../context/NotificationContext";
 
 export default function LoginPage() {
     const navigate = useNavigate()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const setNotification = useContext(SetNotificationContext)
     const user = useContext(UserContext)
     console.log(user)
 
@@ -24,27 +26,36 @@ export default function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await axios.post(LOGIN_URL, {username: email, password: password})
-    console.log(response)
-    localStorage.setItem('token', response.data.access)
+    try{
 
-    const token = localStorage.getItem('token')
-    const meResponse = await axios.get(ME_URL, {headers: {Authorization: `Bearer ${token}`}})
-    console.log(meResponse)
-    // copy of the respons from API
-    setUser({
-        user: {...meResponse.data}
-    })
+    
+      const response = await axios.post(LOGIN_URL, {username: email, password: password})
+      console.log(response)
+      localStorage.setItem('token', response.data.access)
 
-    navigate('/')
+      const token = localStorage.getItem('token')
+      const meResponse = await axios.get(ME_URL, {headers: {Authorization: `Bearer ${token}`}})
+      console.log(meResponse)
+      // copy of the respons from API
+      setUser({
+          user: {...meResponse.data}
+      })
+
+      navigate('/')
+      setNotification({open: true, 
+        msg: "You have successfully logged in", 
+        severity: 'success'})
+  } catch (e) {
+    console.log(e)
+    setNotification({open: true, msg: e.response.data.detail, severity: 'error'})
+  }
+  };
 
     // const data = new FormData(event.currentTarget);
     // console.log({
     //   email: data.get("email"),
     //   password: data.get("password"),
     // });
-  };
-
   return (
     <Container component="main" maxWidth="xs">
       <Box

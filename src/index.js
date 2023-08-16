@@ -12,6 +12,28 @@ import LoginPage from './login/LoginPage';
 import UserProvider from './context/UserContext';
 import SearchItemByType from './search/SearchItemByType';
 import SignupPage from './signUp/SignupPage';
+import Notifications from './notifications/Notifications';
+import axios from 'axios';
+
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    console.log('request interceptors called', config)
+    return config
+  }
+)
+
+axios.interceptors.response.use(
+  (response) => {
+    if (response.status === 500) {
+      response.data['isServerError'] = true
+    }
+    response.data['isServerError'] = false
+  }
+)
 
 const router = createBrowserRouter([
   {
@@ -62,9 +84,11 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-<UserProvider>
-  <RouterProvider router={router} />
-</UserProvider>);
+  <Notifications>
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  </Notifications>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

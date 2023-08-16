@@ -14,6 +14,7 @@ import axios from 'axios';
 import { SetUserContext } from './context/UserContext';
 import { ME_URL } from './infra/Urls';
 import { useContext, useEffect } from 'react';
+import { Snackbar } from '@mui/material';
 
 function App() {
   const setUser = useContext(SetUserContext)
@@ -37,7 +38,7 @@ function App() {
 
   return (
     <>
-    <Header /> 
+    <Header />
     <ItemPage />
     {/* <Search />
    
