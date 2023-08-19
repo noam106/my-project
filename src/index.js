@@ -32,6 +32,7 @@ axios.interceptors.response.use(
       response.data['isServerError'] = true
     }
     response.data['isServerError'] = false
+    return response
   }
 )
 

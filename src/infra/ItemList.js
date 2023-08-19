@@ -19,3 +19,18 @@ export const CLOTHES_LIST = [
     'Belt',
     'Other',
   ];
+
+  export const ITEM_CONDITION = [
+    "As New",
+    "Used",
+    "Needed repair",
+    "In box"
+  ];
+
+  export const DELIVERY_METHOD = [
+    "Payment delivery",
+    "Pickup from seller",
+    "Pickup from other location",
+    "Free delivery",
+    "Other"
+  ]

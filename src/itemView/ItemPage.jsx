@@ -1,12 +1,14 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import * as urls from "../infra/Urls";
 import { Button, Fab, Stack } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 import ItemsSearch from "./ItemSearch";
 import ItemList from "./ItemList";
 import AddIcon from '@mui/icons-material/Add';
-import CreateItem from "./CreateItem";
+import Create from "./CreateItem";
+import { UserContext } from "../context/UserContext";
+import { SetNotificationContext } from "../context/NotificationContext";
 
 
 export default function ItemPage() {
@@ -14,6 +16,9 @@ export default function ItemPage() {
     const navigate = useNavigate()
     const [items, setItems] = useState({results:[]})
     const [openAddItem, setOpenAddItem] = useState(false);
+    const user = useContext(UserContext)
+    const setNotification = useContext(SetNotificationContext)
+
 
     const fetchData = async () => {
         let urlToSend = urls.ITEM_LIST_URL
@@ -58,13 +63,20 @@ export default function ItemPage() {
         </Stack>
 
 
-        <Button onClick={() => {navigate('/orders')}}>Go to orders</Button>
+        <Button color='primary' onClick={() => setNotification({open: true, msg: 'going to orders'}) }>Go to orders</Button>
+
+    {user.user &&
+        <>
         <Fab color="primary" aria-label="add" 
-        sx={{position: 'absolute',bottom: 16, right: 16,}}>
+            sx={{position: 'absolute',bottom: 16, right: 16,}}
+            onClick={() => setOpenAddItem(true)}>
             <AddIcon />
         </Fab>
-        {/* <CreateItem open={openAddItem} setOpen={setOpenAddItem}/> */}
-        </>
 
+        <Create open={openAddItem} setOpen={setOpenAddItem}/>
+        </>
+    }
+
+    </>
     )
 }
