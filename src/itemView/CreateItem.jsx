@@ -14,11 +14,15 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import { ADD_ITEM_URL } from '../infra/Urls';
 import axios from 'axios';
+import { SetNotificationContext } from '../context/NotificationContext';
+import ImageUploader from '../components/ImageUploader';
 
 
 
 export default function Create({open, setOpen}) {
 
+  const setNotification = React.useContext(SetNotificationContext)
+  const [msgResponse ,setMsgResponse] = React.useState('Somthing went worng')
   const [formData, setFormData] = React.useState({
     title: '',
     itemType: '',
@@ -49,15 +53,45 @@ export default function Create({open, setOpen}) {
       
       const response = await axios.post(ADD_ITEM_URL, {
         name: formData.title,
-        item_type: formData.itemType,
+        item_type: formData.itemType.toLowerCase(),
         colors: formData.color,
         description: formData.itemDescripion,
         price: formData.price,
-        item_condition: formData.itemCondition,
-        free_delivery: formData.deliveryMethod             
-    }) 
+        item_condition: formData.itemCondition.toLowerCase(),
+        free_delivery: formData.deliveryMethod.toLowerCase()
+                    
+    })
+    handleClose()
+    setFormData ({
+      title: '',
+      itemType: '',
+      color: '',
+      itemCondition: '',
+      price: '',
+      deliveryMethod: '',
+      itemDescripion: '',
+    }); 
+    setNotification({open: true, 
+      msg: "You have successfully added your item", 
+      severity: 'success'})
   } catch (e) {
     console.error(e)
+    var errorResponse = e.response.data
+    let errorMsg = ""
+    if (errorResponse.item_type){
+      errorMsg = 'You need to pick a clothe type'
+    }
+    if (errorResponse.colors){
+      console.log('inside colors',errorResponse.colors)
+      errorMsg = 'Color field cant be empty'
+
+    }
+    if(errorResponse.name){
+      errorMsg = 'You have to give a title to your item'
+    }
+    console.log(errorResponse)
+    setNotification({open: true, msg: errorMsg, severity: 'error'})
+    // setNotification({open: true, msg:` ${errorData}: ${errorFiled}`, severity: 'error'})
   }
 }
   
@@ -171,7 +205,7 @@ export default function Create({open, setOpen}) {
           value={formData.itemDescripion}
           onChange={handleChange}
         />
-
+          <ImageUploader/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

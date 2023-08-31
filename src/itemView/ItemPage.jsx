@@ -9,7 +9,8 @@ import AddIcon from '@mui/icons-material/Add';
 import Create from "./CreateItem";
 import { UserContext } from "../context/UserContext";
 import { SetNotificationContext } from "../context/NotificationContext";
-
+import SearchIcon from '@mui/icons-material/Search';
+import Gallery from "../infra/galleryTest";
 
 export default function ItemPage() {
 
@@ -53,9 +54,6 @@ export default function ItemPage() {
 
     return(
         <>
-        <h2>Items Page</h2>
-        <ItemsSearch />
-
         <Stack direction={'row'}>
             <ItemList items={items} loadMore={fetchData} />
     
@@ -76,6 +74,16 @@ export default function ItemPage() {
         <Create open={openAddItem} setOpen={setOpenAddItem}/>
         </>
     }
+        <>
+        <Fab color="primary" aria-label="search" 
+            sx={{position: 'absolute',bottom: 16, right: 90,}}
+            onClick={() => setOpenAddItem(true)}>
+            <SearchIcon/>
+        </Fab>
+
+        <Create open={openAddItem} setOpen={setOpenAddItem}/>
+        </>
+        <Gallery items={items} loadMore={fetchData} />
 
     </>
     )

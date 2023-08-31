@@ -10,6 +10,7 @@ import { LOGIN_URL, ME_URL, SIGNUP_URL } from '../infra/Urls';
 import axios from 'axios';
 import { SetUserContext, UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -71,6 +72,7 @@ const SignupPage = () => {
   };
 
   return (
+    <GoogleOAuthProvider clientId='655087516681-m5jn8236hknlrh69cvqglh92tvb5hq09.apps.googleusercontent.com'>
     <Container maxWidth="sm">
       <Typography variant="h4" align="center" gutterBottom>
         Sign Up
@@ -150,7 +152,16 @@ const SignupPage = () => {
           Sign Up
         </Button>
       </form>
+      <GoogleLogin 
+          onSuccess={credentialResponse => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />;
     </Container>
+    </GoogleOAuthProvider>
   );
 };
 

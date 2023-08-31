@@ -65,7 +65,7 @@ const navigateAndCloseUserMenu = (setting) => {
 const handleCloseUserMenu = () => {
   setAnchorElUser(null);
 };
-
+console.log("url:", user.user?.url)
 return (
   <AppBar position="static">
     <Container maxWidth="xl">
@@ -159,7 +159,7 @@ return (
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt={user.user?.first_name} src="/static/images/avatar/2.jpg" />
+              <Avatar alt={user.user?.first_name} src={user.user?.img_url} />
             </IconButton>
           </Tooltip>
           <Menu

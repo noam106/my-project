@@ -14,6 +14,7 @@ import SearchItemByType from './search/SearchItemByType';
 import SignupPage from './signUp/SignupPage';
 import Notifications from './notifications/Notifications';
 import axios from 'axios';
+import ProfilePage from './Profile/Profile';
 
 axios.interceptors.request.use(
   (config) => {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: 'review/',
         element: <ReadReview />
+      },
+      {
+        path: 'profile/',
+        element: <ProfilePage />
       }
     ]
   },

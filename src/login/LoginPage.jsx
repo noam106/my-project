@@ -13,6 +13,7 @@ import { LOGIN_URL, ME_URL } from "../infra/Urls";
 import { SetUserContext, UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { SetNotificationContext } from "../context/NotificationContext";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
 export default function LoginPage() {
     const navigate = useNavigate()
@@ -57,6 +58,7 @@ export default function LoginPage() {
     //   password: data.get("password"),
     // });
   return (
+    <GoogleOAuthProvider clientId='655087516681-m5jn8236hknlrh69cvqglh92tvb5hq09.apps.googleusercontent.com'>
     <Container component="main" maxWidth="xs">
       <Box
         sx={{  
@@ -118,8 +120,17 @@ export default function LoginPage() {
               </Link>
             </Grid>
           </Grid>
+          <GoogleLogin 
+          onSuccess={credentialResponse => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />;
         </Box>
       </Box>
     </Container>
+    </GoogleOAuthProvider>
   );
 }

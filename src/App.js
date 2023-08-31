@@ -15,6 +15,8 @@ import { SetUserContext } from './context/UserContext';
 import { ME_URL } from './infra/Urls';
 import { useContext, useEffect } from 'react';
 import { Snackbar } from '@mui/material';
+import SearchItemByType from './search/SearchItemByType';
+import Gallery from './infra/galleryTest';
 
 function App() {
   const setUser = useContext(SetUserContext)
@@ -40,6 +42,7 @@ function App() {
     <>
     <Header />
     <ItemPage />
+    {/* <Gallery />  */}
     {/* <Search />
    
     <ItemExpended />
