@@ -12,16 +12,25 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
-import { ADD_ITEM_URL } from '../infra/Urls';
+import { ADD_ITEM_URL, UPLOAD_ITEM_IMG_URL } from '../infra/Urls';
 import axios from 'axios';
 import { SetNotificationContext } from '../context/NotificationContext';
 import ImageUploader from '../components/ImageUploader';
+import { SetUserContext, UserContext } from '../context/UserContext';
+import { useContext } from 'react';
+import { useState } from 'react';
 
 
 
 export default function Create({open, setOpen}) {
 
   const setNotification = React.useContext(SetNotificationContext)
+  const userContext = React.useContext(UserContext)
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const setUserContext = useContext(SetUserContext)
+  const [inFlight, setInFlight] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [passes, setPasses] = useState([])
   const [msgResponse ,setMsgResponse] = React.useState('Somthing went worng')
   const [formData, setFormData] = React.useState({
     title: '',
@@ -32,6 +41,34 @@ export default function Create({open, setOpen}) {
     deliveryMethod: '',
     itemDescripion: '',
   }); 
+
+  const handleFileSelect = (event) => {
+
+    if (event.target.files) {
+      const files = event.target.files;
+      setSelectedFiles([...selectedFiles, ...files])
+    }
+    };
+
+const handleUploadProgress = (progressEvent) => {
+    // console.log(progressEvent)
+    setProgress(progressEvent.progress * 100)
+}
+
+const handleUploadClick = async (file) => {
+    setInFlight(true)
+    const response = await axios.post(
+        UPLOAD_ITEM_IMG_URL,
+        {file: file},
+        {headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: handleUploadProgress
+        }
+    )
+    setInFlight(false)
+    console.log(response)
+}
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -60,7 +97,16 @@ export default function Create({open, setOpen}) {
         item_condition: formData.itemCondition.toLowerCase(),
         free_delivery: formData.deliveryMethod.toLowerCase()
                     
-    })
+    });
+    console.log(selectedFiles)
+    for (let i = 0; i < selectedFiles.length; i++) {
+      console.log('sending file, ', selectedFiles[i])
+      await handleUploadClick(selectedFiles[i])
+      
+    }
+    // {selectedFiles.map((file) =>(
+    //   handleUploadClick(file)
+    // ))};
     handleClose()
     setFormData ({
       title: '',
@@ -73,7 +119,8 @@ export default function Create({open, setOpen}) {
     }); 
     setNotification({open: true, 
       msg: "You have successfully added your item", 
-      severity: 'success'})
+      severity: 'success'});
+    setSelectedFiles([])
   } catch (e) {
     console.error(e)
     var errorResponse = e.response.data
@@ -205,7 +252,7 @@ export default function Create({open, setOpen}) {
           value={formData.itemDescripion}
           onChange={handleChange}
         />
-          <ImageUploader/>
+          <ImageUploader selectedFiles={selectedFiles} handleFilesChange={handleFileSelect}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
