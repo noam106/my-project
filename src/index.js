@@ -27,7 +27,7 @@ axios.interceptors.request.use(
   }
 )
 
-axios.interceptors.response.use(
+/*axios.interceptors.response.use(
   (response) => {
     if (response.status === 500) {
       response.data['isServerError'] = true
@@ -35,7 +35,7 @@ axios.interceptors.response.use(
     response.data['isServerError'] = false
     return response
   }
-)
+)*/
 
 const router = createBrowserRouter([
   {

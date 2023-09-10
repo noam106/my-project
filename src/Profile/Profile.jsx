@@ -32,18 +32,23 @@ export default function ProfilePage() {
 
     const handleUploadClick = async () => {
         setInFlight(true)
-        const response = await axios.post(
-            UPLOAD_PROFILE_IMG_URL,
-            {file: file},
-            {headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            onUploadProgress: handleUploadProgress
-            }
-        )
-        setUserContext({user: response.data})
+        try {
+            const response = await axios.post(
+                UPLOAD_PROFILE_IMG_URL,
+                {file: file},
+                {headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress: handleUploadProgress
+                }
+            )
+         setUserContext({user: {...userContext.user, img_url:response.data}})
+         console.log("Response:")
+         console.log(response)
+        } catch(e) {
+            console.error(e.message)
+        }
         setInFlight(false)
-        console.log(response)
     }
 
 
