@@ -34,12 +34,12 @@ export default function Create({open, setOpen}) {
   const [msgResponse ,setMsgResponse] = React.useState('Somthing went worng')
   const [formData, setFormData] = React.useState({
     title: '',
-    itemType: '',
-    color: '',
-    itemCondition: '',
+    item_type: '',
+    colors: '',
+    item_condition: '',
     price: '',
-    deliveryMethod: '',
-    itemDescripion: '',
+    delivery_method: '',
+    description: '',
   }); 
 
   const handleFileSelect = (event) => {
@@ -85,37 +85,38 @@ const handleUploadClick = async (file) => {
   const handleSubmit = async event => {
     event.preventDefault();
     console.log(formData);
+
+    const fData = new FormData(event.target)
+    selectedFiles.forEach((file,index) => {
+      fData.append(`file`, file)
+    })
     // TODO: Handle form submission and API requests here
      try {
       
-      const response = await axios.post(ADD_ITEM_URL, {
-        name: formData.title,
-        item_type: formData.itemType.toLowerCase(),
-        colors: formData.color,
-        description: formData.itemDescripion,
-        price: formData.price,
-        item_condition: formData.itemCondition.toLowerCase(),
-        free_delivery: formData.deliveryMethod.toLowerCase()
-                    
-    });
+      const response = await axios.post(ADD_ITEM_URL, fData,{
+        headers: {
+          'Content-Type' : 'multipart/form-data'
+        }
+      });
+      console.log(response)
     console.log(selectedFiles)
-    for (let i = 0; i < selectedFiles.length; i++) {
+    /*for (let i = 0; i < selectedFiles.length; i++) {
       console.log('sending file, ', selectedFiles[i])
       await handleUploadClick(selectedFiles[i])
       
-    }
+    }*/
     // {selectedFiles.map((file) =>(
     //   handleUploadClick(file)
     // ))};
     handleClose()
     setFormData ({
       title: '',
-      itemType: '',
+      item_type: '',
       color: '',
-      itemCondition: '',
+      item_condition: '',
       price: '',
-      deliveryMethod: '',
-      itemDescripion: '',
+      delivery_method: '',
+      description: '',
     }); 
     setNotification({open: true, 
       msg: "You have successfully added your item", 
@@ -147,6 +148,7 @@ const handleUploadClick = async (file) => {
     <div>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Item</DialogTitle>
+        <form onSubmit={handleSubmit}>
         <DialogContent>
           {/* <DialogContentText>
             To subscribe to this website, please enter your email address here. We
@@ -166,13 +168,13 @@ const handleUploadClick = async (file) => {
           />
         <TextField
           id="itemType"
-          name='itemType'
+          name='item_type'
           select
           label="Select"
           defaultValue="Shirt"
           margin="dense"
           helperText="Please select your clothe type"
-          value={formData.itemType}
+          value={formData.item_type}
           onChange={handleChange}
         >
           {clothes.CLOTHES_LIST.map((option) => (
@@ -185,23 +187,23 @@ const handleUploadClick = async (file) => {
             autoFocus
             margin="dense"
             id="color"
-            name='color'
+            name='colors'
             label="Item color"
             // type="color"
             fullWidth
             variant="standard"
-            value={formData.color}
+            value={formData.colors}
             onChange={handleChange}
           />
           <TextField
           id="itemCondition"
-          name='itemCondition'
+          name='item_condition'
           select
           label="Select"
           defaultValue="As New"
           margin="dense"
           helperText="Please select your item condition"
-          value={formData.itemCondition}
+          value={formData.item_condition}
           onChange={handleChange}
         >
           {clothes.ITEM_CONDITION.map((option) => (
@@ -225,13 +227,13 @@ const handleUploadClick = async (file) => {
         </FormControl>
         <TextField
           id="deliveryMethod"
-          name='deliveryMethod'
+          name='delivery_method'
           select
           label="Select"
           defaultValue="Pickup from seller"
           margin="dense"
           helperText="Please select your delivery method"
-          value={formData.deliveryMethod}
+          value={formData.delivery_method}
           onChange={handleChange}
         >
           {clothes.DELIVERY_METHOD.map((option) => (
@@ -243,21 +245,22 @@ const handleUploadClick = async (file) => {
         <TextField
           sx={{ m: 1, width: '25ch' }} variant="outlined"
           id="itemDescripion"
-          name='itemDescripion'
+          name='description'
           label="Item description"
           multiline
           rows={4}
           placeholder="Write your description here"
           margin="dense"
-          value={formData.itemDescripion}
+          value={formData.description}
           onChange={handleChange}
         />
-          <ImageUploader selectedFiles={selectedFiles} handleFilesChange={handleFileSelect}/>
+          <ImageUploader selectedFiles={selectedFiles} handleFilesChange={handleFileSelect} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Subscribe</Button>
+          <Button type='submit'>Subscribe</Button>
         </DialogActions>
+        </form>
       </Dialog>
     </div>
   );
