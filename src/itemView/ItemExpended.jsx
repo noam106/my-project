@@ -14,6 +14,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -37,7 +40,8 @@ export default function ItemExpended({item}) {
   console.log('from gallery deep', item)
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <SwiperSlide>
+    <Card sx={{ maxWidth: 345}}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -55,8 +59,8 @@ export default function ItemExpended({item}) {
       <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
+        image={item.item_img.length > 0 ? item.item_img[0] : null}
+        alt="No image"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
@@ -97,5 +101,6 @@ export default function ItemExpended({item}) {
         </CardContent>
       </Collapse>
     </Card>
+    </SwiperSlide>
   );
 }

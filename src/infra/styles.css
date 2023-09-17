@@ -39,3 +39,13 @@
     object-fit: cover;
   }
   
+  
+.gallery {
+  display:flex;
+  flex-direction: row;
+  place-items: center;
+  row-gap: 1.4rem;
+  column-gap: 16px;
+  overflow-x: scroll;
+}
+

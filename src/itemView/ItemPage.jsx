@@ -28,12 +28,6 @@ export default function ItemPage() {
         }
         try {
             const response = await axios.get(urlToSend)
-            // console.log(response)
-            // console.log(response.data)
-            // console.log(items.results)
-            
-            // console.log(results)
-            // setFlights(response.data)
             setItems(
                 {...items,
                 next: response.data.next,
@@ -54,12 +48,11 @@ export default function ItemPage() {
 
     return(
         <>
-        <Stack direction={'row'}>
+        {/*<Stack direction={'row'}>
             <ItemList items={items} loadMore={fetchData} />
     
             <Outlet />
-        </Stack>
-
+    </Stack>*/}
 
         <Button color='primary' onClick={() => setNotification({open: true, msg: 'going to orders'}) }>Go to orders</Button>
 
@@ -84,7 +77,6 @@ export default function ItemPage() {
         <Create open={openAddItem} setOpen={setOpenAddItem}/>
         </>
         <Gallery items={items} loadMore={fetchData} />
-
     </>
     )
 }
