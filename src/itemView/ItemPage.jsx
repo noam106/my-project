@@ -11,40 +11,42 @@ import { UserContext } from "../context/UserContext";
 import { SetNotificationContext } from "../context/NotificationContext";
 import SearchIcon from '@mui/icons-material/Search';
 import Gallery from "../infra/galleryTest";
+import FilteredGallery from "./FilteredGallery";
 
 export default function ItemPage() {
 
     const navigate = useNavigate()
-    const [items, setItems] = useState({results:[]})
+    // const [items, setItems] = useState({results:[]})
     const [openAddItem, setOpenAddItem] = useState(false);
+    const [openSearchItem, setOpenSearchItem] = useState(false)
     const user = useContext(UserContext)
     const setNotification = useContext(SetNotificationContext)
 
 
-    const fetchData = async () => {
-        let urlToSend = urls.ITEM_LIST_URL
-        if (items.results.length > 0) {
-            urlToSend = items.next
-        }
-        try {
-            const response = await axios.get(urlToSend)
-            setItems(
-                {...items,
-                next: response.data.next,
-                results: [...items.results, ...response.data.results]
-            }
-            )
-        } catch (e) {
-            console.error(e)
-        }
-    }
+    // const fetchData = async () => {
+    //     let urlToSend = urls.ITEM_LIST_URL
+    //     if (items.results.length > 0) {
+    //         urlToSend = items.next
+    //     }
+    //     try {
+    //         const response = await axios.get(urlToSend)
+    //         setItems(
+    //             {...items,
+    //             next: response.data.next,
+    //             results: [...items.results, ...response.data.results]
+    //         }
+    //         )
+    //     } catch (e) {
+    //         console.error(e)
+    //     }
+    // }
 
-    useEffect(
-        () => {
-            fetchData()
-        }
-        ,[]
-    )
+    // useEffect(
+    //     () => {
+    //         fetchData()
+    //     }
+    //     ,[]
+    // )
 
     return(
         <>
@@ -70,13 +72,16 @@ export default function ItemPage() {
         <>
         <Fab color="primary" aria-label="search" 
             sx={{position: 'absolute',bottom: 16, right: 90,}}
-            onClick={() => setOpenAddItem(true)}>
+            onClick={() => setOpenSearchItem(true)}>
             <SearchIcon/>
         </Fab>
 
-        <Create open={openAddItem} setOpen={setOpenAddItem}/>
+        <ItemsSearch open={openSearchItem} setOpen={setOpenSearchItem}/>
         </>
-        <Gallery items={items} loadMore={fetchData} />
+        {/* <Gallery items={items} loadMore={fetchData} /> */}
+        {/* <Gallery item */}
+        <FilteredGallery />
+        <FilteredGallery filters={{colors: 'blue'}} />
     </>
     )
 }

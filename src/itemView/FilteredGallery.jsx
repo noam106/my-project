@@ -9,10 +9,40 @@ import 'swiper/css/scrollbar';
 // import required modules
 import { Pagination } from 'swiper/modules';
 import ItemExpended from '../itemView/ItemExpended';
+import { ITEM_LIST_URL } from '../infra/Urls';
+import axios from 'axios';
+import { useEffect } from 'react';
 
-export default function Gallery({items, loadMore}) {
+export default function FilteredGallery({filters={}}) {
+    
+    const [items, setItems] = useState({results:[]})
     const {count, next, results} = items
     console.log('from gallrey', items.results)
+
+    const fetchData = async () => {
+        let urlToSend = ITEM_LIST_URL
+        if (items.results.length > 0) {
+            urlToSend = items.next
+        }
+        try {
+            const response = await axios.get(urlToSend, {params: filters})
+            setItems(
+                {...items,
+                next: response.data.next,
+                results: [...items.results, ...response.data.results]
+            }
+            )
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    useEffect(
+        () => {
+            fetchData()
+        }
+        ,[]
+    )
 
     const clothes = results.map((item) => {
         return <SwiperSlide><ItemExpended key={item.id} item={item} /></SwiperSlide> 
@@ -24,9 +54,7 @@ export default function Gallery({items, loadMore}) {
       pagination={{ clickable: true }}
       slidesPerView={3}
       modules={[Pagination]}
-      onReachEnd={() => {
-        loadMore()
-      }}
+      onReachEnd={fetchData}
       slidesPerGroup={5}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
