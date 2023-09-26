@@ -11,3 +11,54 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.logo {
+  width:70px;
+  height:70px;
+  object-fit:cover;
+  margin-right: 16px;
+  border-radius: 50%;
+}
+
+
+.Demo__container {
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+}
+
+.logo-header {
+  object-fit:fill;
+  width:70px;
+  height:70px;
+}
+
+@font-face {
+  font-family: Audiowide;
+  src: url(assets/fonts/Audiowide\ Regular.ttf);
+}
+@font-face {
+  font-family: SansPro;
+  src: url(assets/fonts/Source\ Sans\ Pro\ Regular.ttf);
+}
+
+* {
+  font-family: SansPro !important;
+}
+.header {
+  background:#8ABCD7 !important;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px !important;
+}
+.swiper {
+  max-width:90%;
+}
+.gallery {
+  display: flex;
+  flex-direction: column !important;
+}
+.app {
+  background-image:url(assets/images/suitapp-low-resolution-logo-black-on-white-background.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}

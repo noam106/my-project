@@ -17,6 +17,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
+import { useShare } from './shareItem/ShareItem';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -33,9 +34,9 @@ const handleSherClick = () => {
   return
 }
 
-
 export default function ItemExpended({item}) {
   const [expanded, setExpanded] = React.useState(false);
+  const openShare = useShare(item?.name,"http://google.com")
     
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -43,8 +44,7 @@ export default function ItemExpended({item}) {
   console.log('from gallery deep', item)
 
   return (
-    <SwiperSlide>
-    <Card sx={{ maxWidth: 345}}>
+    <Card sx={{width:'100%',maxWidth:'300px'}}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -74,7 +74,7 @@ export default function ItemExpended({item}) {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton aria-label="share" onClick={openShare}>
           <ShareIcon />
         </IconButton>
         <ExpandMore
@@ -104,6 +104,5 @@ export default function ItemExpended({item}) {
         </CardContent>
       </Collapse>
     </Card>
-    </SwiperSlide>
   );
 }

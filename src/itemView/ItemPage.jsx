@@ -80,8 +80,11 @@ export default function ItemPage() {
         </>
         {/* <Gallery items={items} loadMore={fetchData} /> */}
         {/* <Gallery item */}
-        <FilteredGallery />
-        <FilteredGallery filters={{colors: 'blue'}} />
+        <div className="gallery">
+            <FilteredGallery />
+            <FilteredGallery filters={{colors: 'blue'}} />
+        </div>
+
     </>
     )
 }

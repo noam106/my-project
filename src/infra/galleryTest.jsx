@@ -18,11 +18,11 @@ export default function Gallery({items, loadMore}) {
         return <SwiperSlide><ItemExpended key={item.id} item={item} /></SwiperSlide> 
   })
 
-
       return  <Swiper
       spaceBetween={50}
       pagination={{ clickable: true }}
       slidesPerView={3}
+      className='swiper'
       modules={[Pagination]}
       onReachEnd={() => {
         loadMore()

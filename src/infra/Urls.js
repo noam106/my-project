@@ -1,4 +1,4 @@
-// export const BASE_URL = "http://34.42.119.5:80"
+// export const BASE_URL = "http://34.136.31.97:80"
 // export const BASE_URL = ""
 export const BASE_URL = "http://127.0.0.1:8000"
 export const ITEM_LIST_URL = `${BASE_URL}/api/items/`

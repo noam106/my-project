@@ -26,12 +26,15 @@ function App() {
       const fetchData = async () => {
         // const token = localStorage.getItem('token')
         // if (token) {
-          const meResponse = await axios.get(ME_URL)
+          try {
+            const meResponse = await axios.get(ME_URL)
+            console.log("app log", meResponse)
+            setUser({
+              user: {...meResponse.data}
+            })
+          } catch(e) {}
             // {headers: {Authorization: `Bearer ${token}`}})
-          console.log("app log", meResponse)
-          setUser({
-            user: {...meResponse.data}
-          })
+          
         // }
       }
       fetchData()
@@ -39,9 +42,9 @@ function App() {
   )
 
   return (
-    <>
+    <div className='app'>
     <Header />
-    <ItemPage />
+    {/* <ItemPage /> */}
     {/* <Gallery />  */}
     {/* <Search />
    
@@ -51,7 +54,7 @@ function App() {
     <ReadReview />
     <WriteReview /> */}
     <Outlet/>
-    </>
+    </div>
   );
 }
 

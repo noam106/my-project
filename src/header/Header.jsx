@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
 import { useNavigate } from 'react-router-dom';
 import { SetUserContext, UserContext } from '../context/UserContext';
-
+import logo from '../assets/images/suitapp-website-favicon-black.png'
 const pages = ['Home', 'me', 'rewiew'];
 const settingsSinginUser = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const settingsAnnonimusUser = ['Login', 'Signup'];
@@ -67,10 +67,10 @@ const handleCloseUserMenu = () => {
 };
 console.log("url:", user.user?.url)
 return (
-  <AppBar position="static">
-    <Container maxWidth="xl">
+  <AppBar position="static" className='header'>
+    <Container maxWidth="xl" >
       <Toolbar disableGutters>
-        <CheckroomIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <img className='logo-header' src={logo}/>
         <Typography
           variant="h6"
           noWrap
@@ -119,13 +119,20 @@ return (
             }}
           >
             {pages.map((page) => (
-              <MenuItem key={page} onClick={() => navigateAndCloseMenu(page)}>
-                <Typography textAlign="center">{page}</Typography>
-              </MenuItem>
+              <Button
+              key={page}
+              onClick={()=>handleCloseNavMenu(page)}
+              sx={{my:2,color:"white",display:'block'}}
+              >
+                {page}
+              </Button>
+              // <MenuItem key={page} onClick={() => navigateAndCloseMenu(page)}>
+              //   <Typography textAlign="center">{page}</Typography>
+              // </MenuItem>
             ))}
           </Menu>
         </Box>
-        <CheckroomIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
         <Typography
           variant="h5"
           noWrap

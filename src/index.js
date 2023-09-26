@@ -14,7 +14,8 @@ import SearchItemByType from './search/SearchItemByType';
 import SignupPage from './signUp/SignupPage';
 import Notifications from './notifications/Notifications';
 import axios from 'axios';
-import ProfilePage from './Profile/Profile';
+import ProfilePage from './Profile/ProfilePage';
+import ItemViewPage from './itemView/ItemViewPage';
 
 axios.interceptors.request.use(
   (config) => {
@@ -58,15 +59,21 @@ const router = createBrowserRouter([
         path: 'me/',
         element: <UserInfo />,
       },
-      // {
-      //   path: 'search/',
-      //   element: <SearchItemByType />,
-      // },
+      {
+        // dynamic path - will receive game id (note :)
+        // path: "Items/:itemId",
+        path: 'item/:itemId',
+        element: <ItemViewPage />
+      },
       {
         // dynamic path - will receive game id (note :)
         // path: "Items/:itemId",
         path: 'items/',
         element: <ItemExpended />
+      },
+      {
+        path: "itemReview/",
+        element: <ItemViewPage/>
       },
       {
         path: 'review/',

@@ -1,6 +1,12 @@
+import ItemPage from "../itemView/ItemPage"
+
+
+
 const Home = () => {
     return(
-        <h1>home</h1>
+        <>
+        <ItemPage/>
+        </>
     )
 }
 

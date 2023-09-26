@@ -49,3 +49,29 @@
   overflow-x: scroll;
 }
 
+.item-page {
+  margin-inline: auto;
+  width: fit-content;
+  display: flex;
+  padding: 32px;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 50%;
+}
+
+.item-page .item-details {
+  min-width: 300px;
+  background:whitesmoke;
+  height:fit-content;
+  padding:24px;
+  margin-inline: 16px;
+  border-radius: 12px;
+  border: 1px solid lightgray;
+}
+
+
+
+.share-like {
+  margin-left: auto;
+  width: fit-content;
+}
