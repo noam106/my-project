@@ -9,3 +9,4 @@ export const ADD_ITEM_URL = `${BASE_URL}/api/items/`
 export const UPLOAD_PROFILE_IMG_URL = `${BASE_URL}/api/auth/me/img`
 export const UPLOAD_ITEM_IMG_URL = `${BASE_URL}/api/items/`
 export const GOOGLE_AUTH_URL = `${BASE_URL}/api/auth/google-auth`
+export const ITEM_SHERE_URL = `${BASE_URL}/api/item/`

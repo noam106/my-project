@@ -126,9 +126,9 @@ return (
               >
                 {page}
               </Button>
-              // <MenuItem key={page} onClick={() => navigateAndCloseMenu(page)}>
-              //   <Typography textAlign="center">{page}</Typography>
-              // </MenuItem>
+          //  <MenuItem key={page} onClick={() => navigateAndCloseMenu(page)}>
+          //       <Typography textAlign="center">{page}</Typography>
+          //     </MenuItem>   
             ))}
           </Menu>
         </Box>

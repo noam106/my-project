@@ -18,6 +18,7 @@ import { SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import { useShare } from './shareItem/ShareItem';
+import { ITEM_SHERE_URL } from '../infra/Urls';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -36,7 +37,7 @@ const handleSherClick = () => {
 
 export default function ItemExpended({item}) {
   const [expanded, setExpanded] = React.useState(false);
-  const openShare = useShare(item?.name,"http://google.com")
+  const openShare = useShare(item?.name,`${ITEM_SHERE_URL}/${item.id}`)
     
   const handleExpandClick = () => {
     setExpanded(!expanded);

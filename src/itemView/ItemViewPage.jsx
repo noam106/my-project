@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Navigate, useParams } from "react-router-dom"
-import { BASE_URL } from "../infra/Urls"
+import { BASE_URL, ITEM_SHERE_URL } from "../infra/Urls"
 import { IconButton, ImageList, ImageListItem } from "@mui/material"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
@@ -46,8 +46,9 @@ export default function  ItemViewPage () {
     const {itemId} = useParams()
 
     const item = useItem(itemId)
+    console.log(item, "from shere")
     
-    const openShare = useShare(item?.name,"http://google.com")
+    const openShare = useShare(item?.name,`${ITEM_SHERE_URL}/${item.id}`)
     if(item === undefined) {
         return  <div>Loading..</div>
     }

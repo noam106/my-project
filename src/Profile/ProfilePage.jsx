@@ -23,6 +23,7 @@ import { CircularProgressWithLabel } from '../infra/circularProgress/circularPro
 import UpdateProfile from './UpdateProfile';
 import { Button } from '@mui/material';
 import { Navigate } from 'react-router-dom';
+import FilteredGallery from '../itemView/FilteredGallery';
 
 
 export default function ProfilePage() {
@@ -156,6 +157,10 @@ export default function ProfilePage() {
          </MDBCol>
         </MDBRow>
       </MDBContainer>
+      <h1>Your item list</h1>
+    <FilteredGallery filters={{user: userContext.user.id}} />
+    <h1 className="home-page-style">Hi {userContext.user.first_name} thosh item are still waiting for you</h1>
     </section>
+    
   );
 }

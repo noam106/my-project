@@ -15,11 +15,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { ADD_ITEM_URL, ITEM_LIST_URL } from '../infra/Urls';
 import axios from 'axios';
 import FilteredGallery from './FilteredGallery';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 
 export default function ItemSearch({open, setOpen}) {
-
+  const navigate = useNavigate()
   const [formData, setFormData] = React.useState({
     name: '',
     itemType: '',
@@ -45,7 +46,7 @@ export default function ItemSearch({open, setOpen}) {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    console.log(formData, "form data");
+    console.log(formData, "form search data");
     
     // TODO: Handle form submission and API requests here
      try {
@@ -65,14 +66,15 @@ export default function ItemSearch({open, setOpen}) {
     min_price:'',
     deliveryMethod: '',
     itemDescripion: '',
-  }); 
-}
+  });
+  navigate('/search_resolte')
+  }
   
 
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New Item</DialogTitle>
+        <DialogTitle>Search Item</DialogTitle>
         <DialogContent>
           {/* <DialogContentText>
             To subscribe to this website, please enter your email address here. We

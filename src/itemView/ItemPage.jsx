@@ -81,8 +81,12 @@ export default function ItemPage() {
         {/* <Gallery items={items} loadMore={fetchData} /> */}
         {/* <Gallery item */}
         <div className="gallery">
+            <h1 className="home-page-style">New arrivel</h1>
             <FilteredGallery />
+            <h1 className="home-page-style"> Our favorint color BLUE</h1>
             <FilteredGallery filters={{colors: 'blue'}} />
+            <h1 className="home-page-style">No more then 50 Shekels</h1>
+            <FilteredGallery filters={{max_price: "50"}} />
         </div>
 
     </>
