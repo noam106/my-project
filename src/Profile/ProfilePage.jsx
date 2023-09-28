@@ -128,7 +128,7 @@ export default function ProfilePage() {
               <MDBCardBody>
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Full Name</MDBCardText>
+                    <MDBCardText className='home-page-style' style={{FontFace: 'Audiowide'}}>Full Name</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">{userContext.user.first_name} {userContext.user.last_name}</MDBCardText>
@@ -137,7 +137,7 @@ export default function ProfilePage() {
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Email</MDBCardText>
+                    <MDBCardText className='home-page-style' style={{FontFace: 'Audiowide'}}>Email</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">{userContext.user.email}</MDBCardText>
@@ -146,7 +146,7 @@ export default function ProfilePage() {
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Phone</MDBCardText>
+                    <MDBCardText className='home-page-style' style={{FontFace: 'Audiowide'}}>Phone</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">{userContext.user.phone_number}</MDBCardText>
@@ -155,7 +155,7 @@ export default function ProfilePage() {
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Address</MDBCardText>
+                    <MDBCardText className='home-page-style' style={{FontFace: 'Audiowide'}}>Address</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">{userContext.user.address}</MDBCardText>
@@ -166,9 +166,9 @@ export default function ProfilePage() {
          </MDBCol>
         </MDBRow>
       </MDBContainer>
-      <h1>Your item list</h1>
+      <h1 className="home-page-style">Your item list</h1>
     <FilteredGallery filters={{user: userContext.user.id}} />
-    <h1 className="home-page-style">Hi {userContext.user.first_name} thosh item are still waiting for you</h1>
+    <h1 className="home-page-style">Hi {userContext.user.first_name} Thosh item are still waiting for you</h1>
     </section>
     
   );
