@@ -16,7 +16,7 @@ import CheckroomIcon from '@mui/icons-material/Checkroom';
 import { useNavigate } from 'react-router-dom';
 import { SetUserContext, UserContext } from '../context/UserContext';
 import logo from '../assets/images/suitapp-website-favicon-black.png'
-const pages = ['Home', 'me', 'rewiew'];
+const pages = [{title:'Home',url:'Home'}, {title: 'me', url: "profile"}, {title:'rewiew',url:'rewiew'}];
 const settingsSinginUser = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const settingsAnnonimusUser = ['Login', 'Signup'];
 
@@ -120,11 +120,11 @@ return (
           >
             {pages.map((page) => (
               <Button
-              key={page}
-              onClick={()=>handleCloseNavMenu(page)}
+              key={page.title}
+              onClick={()=>handleCloseNavMenu(page.url)}
               sx={{my:2,color:"white",display:'block'}}
               >
-                {page}
+                {page.title}
               </Button>
           //  <MenuItem key={page} onClick={() => navigateAndCloseMenu(page)}>
           //       <Typography textAlign="center">{page}</Typography>
@@ -154,11 +154,11 @@ return (
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {pages.map((page) => (
             <Button
-              key={page}
-              onClick={() => handleCloseNavMenu(page)}
+              key={page.title}
+              onClick={()=> navigateAndCloseMenu(page.url)}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              {page}
+              {page.title}
             </Button>
           ))}
         </Box>

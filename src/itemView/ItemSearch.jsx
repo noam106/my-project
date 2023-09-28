@@ -47,11 +47,12 @@ export default function ItemSearch({open, setOpen}) {
   const handleSubmit = async event => {
     event.preventDefault();
     console.log(formData, "form search data");
-    
+    let data;
     // TODO: Handle form submission and API requests here
      try {
       
       const response = await axios.get(ITEM_LIST_URL, {params: formData})
+      data = response.data;
       console.log(response)
   } catch (e) {
     console.error(e)
@@ -67,7 +68,7 @@ export default function ItemSearch({open, setOpen}) {
     deliveryMethod: '',
     itemDescripion: '',
   });
-  navigate('/search_resolte')
+  navigate('/search_resolte', {state: data})
   }
   
 

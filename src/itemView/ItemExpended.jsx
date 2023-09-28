@@ -19,6 +19,7 @@ import { SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useShare } from './shareItem/ShareItem';
 import { ITEM_SHERE_URL } from '../infra/Urls';
+import { UserContext } from '../context/UserContext';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -37,19 +38,19 @@ const handleSherClick = () => {
 
 export default function ItemExpended({item}) {
   const [expanded, setExpanded] = React.useState(false);
+  
   const openShare = useShare(item?.name,`${ITEM_SHERE_URL}/${item.id}`)
     
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  console.log('from gallery deep', item)
 
   return (
     <Card sx={{width:'100%',maxWidth:'300px'}}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            {(item && item.user &&  (item.user.img_url ? <img src={ item.user.img_url}/> : <span>{item.user.first_name[0]}</span> )  )}
           </Avatar>
         }
         action={

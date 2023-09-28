@@ -58,9 +58,6 @@ code {
   flex-direction: column !important;
 }
 .app {
-  background-image:url(assets/images/suitapp-low-resolution-logo-black-on-white-background.png);
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .home-page-style {

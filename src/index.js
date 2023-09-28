@@ -17,6 +17,7 @@ import axios from 'axios';
 import ProfilePage from './Profile/ProfilePage';
 import ItemViewPage from './itemView/ItemViewPage';
 import FilteredGallery from './itemView/FilteredGallery';
+import Search from './itemView/Search';
 
 axios.interceptors.request.use(
   (config) => {
@@ -86,7 +87,7 @@ const router = createBrowserRouter([
       },
       {
         path: "search_resolte/",
-        element: <FilteredGallery />
+        element: <Search />
       }
     ]
   },

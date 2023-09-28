@@ -58,8 +58,12 @@ export default function ItemPage() {
 
         <Button color='primary' onClick={() => setNotification({open: true, msg: 'going to orders'}) }>Go to orders</Button>
 
+
+<div style={{position:'fixed',bottom:'16px', right:'16px',zIndex:'9999'}}>
     {user.user &&
         <>
+
+
         <Fab color="primary" aria-label="add" 
             sx={{position: 'absolute',bottom: 16, right: 16,}}
             onClick={() => setOpenAddItem(true)}>
@@ -75,9 +79,9 @@ export default function ItemPage() {
             onClick={() => setOpenSearchItem(true)}>
             <SearchIcon/>
         </Fab>
-
-        <ItemsSearch open={openSearchItem} setOpen={setOpenSearchItem}/>
         </>
+        </div>
+        <ItemsSearch open={openSearchItem} setOpen={setOpenSearchItem}/>
         {/* <Gallery items={items} loadMore={fetchData} /> */}
         {/* <Gallery item */}
         <div className="gallery">

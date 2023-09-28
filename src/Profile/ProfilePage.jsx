@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {
   MDBCol,
   MDBContainer,
@@ -33,6 +33,8 @@ export default function ProfilePage() {
     const [inFlight, setInFlight] = useState(false)
     const [progress, setProgress] = useState(0)
     const [passes, setPasses] = useState([])
+    const ref = useRef()
+
     console.log(userContext)
     let imageSource = userContext?.user?.img_url;
     if (!imageSource) {
@@ -81,33 +83,40 @@ export default function ProfilePage() {
         return <Navigate to ="/"/>
     }
 
+
   return (
-    <section style={{ backgroundColor: '#eee' }}>
+    <section style={{ backgroundColor: '#eee',display:'flex',flexDirection:'column',alignItems:'center',width:'80%',minWidth:'400px',marginInline:'auto',marginBlock:'16px' }}>
       <MDBContainer className="py-5">
          <MDBRow>
           <MDBCol lg="4">
             <MDBCard className="mb-4">
-              <MDBCardBody className="text-center">
+              <MDBCardBody className="text-center" style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
+             
               <MDBCardImage
                 src={imageSource}
                 alt="User Image"
+                onClick={() => {
+                  ref.current?.click()
+                }}
                 className="rounded-circle"
-                style={{ width: '150px' }}
+                style={{ width: '100px',height:'100px',borderRadius:'50%',objectFit:'cover',objectPosition:'center' }}
                 fluid
                 />
+                <br/>
                 <input
                     type="file" 
+                    style={{display:'none'}}
+                    ref={ref}
                     multiple
                     accept="image/*"
                     onChange={handleFileSelect}/>
 
-                <div className="d-flex justify-content-center mb-2">
+                <div style={{display:'flex',marginBlock:'8px',flexDirection:'row',columnGap:'8px'}}>
                   <MDBBtn onClick={handleUploadClick} 
                     disabled={inFlight || file == ''}>Change picture</MDBBtn>
                     {inFlight &&
                     <CircularProgressWithLabel value={progress} />
                     }
-                  <MDBBtn outline className="ms-1" onClick={handleUpDateProfile}>Update</MDBBtn>
                 </div>
               </MDBCardBody>
             </MDBCard>

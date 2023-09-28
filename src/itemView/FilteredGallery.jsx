@@ -45,8 +45,9 @@ export default function FilteredGallery({filters={}}) {
     )
 
     const clothes = results.map((item) => {
-        return <SwiperSlide style={{background:'transparent',width:'fit-content'}}><ItemExpended key={item.id} item={item} /></SwiperSlide> 
+        return <SwiperSlide style={{background:'transparent'}}><ItemExpended key={item.id} item={item} /></SwiperSlide> 
   })
+
 
       return  <Swiper
       spaceBetween={50}
