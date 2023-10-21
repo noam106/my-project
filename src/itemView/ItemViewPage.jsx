@@ -54,7 +54,7 @@ export default function  ItemViewPage () {
     }
 
     if(item  === null) {
-        return <Navigate to = "/items" />
+        return <Navigate to = "/" />
     }
 
     

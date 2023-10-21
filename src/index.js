@@ -64,7 +64,7 @@ const router = createBrowserRouter([
       {
         // dynamic path - will receive game id (note :)
         // path: "Items/:itemId",
-        path: 'item/:itemId',
+        path: 'items/:itemId',
         element: <ItemViewPage />
       },
       {

@@ -90,18 +90,27 @@ export default function ItemExpended({item}) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>More about the {item.item_type}:</Typography>
+          <Typography paragraph className='home-page-style'>More about the {item.item_type}:</Typography>
           <Typography paragraph>
             {item.description}
           </Typography>
-          <Typography paragraph>
-          {item.item_type} condition: {item.item_condition}
+          <Typography paragraph className='home-page-style'> 
+          {item.item_type} condition: 
           </Typography>
           <Typography paragraph>
-            Main colors of the {item.item_type} are: {item.colors}
+            {item.item_condition}
           </Typography>
-          <Typography>
-          Delivery method: {item.delivery_method}
+          <Typography paragraph className='home-page-style'>
+            Main colors of the {item.item_type} are: 
+          </Typography>
+          <Typography paragraph>
+            {item.colors}
+          </Typography>
+          <Typography paragraph className='home-page-style'>
+          Delivery method: 
+          </Typography>
+          <Typography paragraph>
+            {item.delivery_method}
           </Typography>
         </CardContent>
       </Collapse>

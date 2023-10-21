@@ -27,7 +27,7 @@ export default function Create({open, setOpen}) {
   const setNotification = React.useContext(SetNotificationContext)
   const userContext = React.useContext(UserContext)
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const setUserContext = useContext(SetUserContext)
+  const setUserContext = useContext(SetUserContext);
   const [inFlight, setInFlight] = useState(false)
   const [progress, setProgress] = useState(0)
   const [passes, setPasses] = useState([])
@@ -43,10 +43,9 @@ export default function Create({open, setOpen}) {
   }); 
 
   const handleFileSelect = (event) => {
-
     if (event.target.files) {
       const files = event.target.files;
-      setSelectedFiles([...selectedFiles, ...files])
+      setSelectedFiles([...selectedFiles, ...files]);
     }
     };
 
@@ -85,11 +84,14 @@ const handleUploadClick = async (file) => {
   const handleSubmit = async event => {
     event.preventDefault();
     console.log(formData);
-
+    console.log(event)
     const fData = new FormData(event.target)
+
     selectedFiles.forEach((file,index) => {
       fData.append(`file`, file)
     })
+
+    console.log("submit")
     // TODO: Handle form submission and API requests here
      try {
       
@@ -98,8 +100,8 @@ const handleUploadClick = async (file) => {
           'Content-Type' : 'multipart/form-data'
         }
       });
-      console.log(response)
-    console.log(selectedFiles)
+      // console.log(response, "from create")
+    // console.log(selectedFiles, "from create")
     /*for (let i = 0; i < selectedFiles.length; i++) {
       console.log('sending file, ', selectedFiles[i])
       await handleUploadClick(selectedFiles[i])
@@ -137,7 +139,7 @@ const handleUploadClick = async (file) => {
     if(errorResponse.name){
       errorMsg = 'You have to give a title to your item'
     }
-    console.log(errorResponse)
+    // console.log(errorResponse)
     setNotification({open: true, msg: errorMsg, severity: 'error'})
     // setNotification({open: true, msg:` ${errorData}: ${errorFiled}`, severity: 'error'})
   }
